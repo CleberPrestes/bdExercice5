@@ -1,6 +1,5 @@
 package posutfpr.banco.ativcinco.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -25,8 +24,7 @@ public class FuncEntity extends AbstractPersistable<Long> {
 	@Column(name = "cargo", length = 64, nullable = true)
 	private String responsibility;
 
-	
-	//@ManyToOne(cascade = CascadeType.ALL)
+	// @ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne
 	@JoinColumn(name = "dep_id")
 	private DepartamentEntity depart;

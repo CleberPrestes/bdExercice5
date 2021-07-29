@@ -13,48 +13,52 @@ import posutfpr.banco.ativcinco.repository.FuncRepository;
 
 @Service
 public class FuncService {
-	
-	
+
 	@Autowired
 	private FuncRepository funcRepository;
-	
+
 	public FuncEntity saveFunc(FuncEntity funcEntity) {
 		return funcRepository.save(funcEntity);
-	   }
-	
-	  public Optional <FuncEntity> findFuncById(Long id) {
-	      return funcRepository.findById(id);
-	   }
+	}
 
-	   public List<FuncEntity> findAllFunc() {
-	      return funcRepository.findAll();
-	   }
-	
-	   
-	   public List<FuncEntity> findByName(String name) {
+	public Optional<FuncEntity> findFuncById(Long id) {
+		return funcRepository.findById(id);
+	}
 
-		   FuncEntity funct = new FuncEntity(); 
-		      funct.setName(name);
+	public List<FuncEntity> findAllFunc() {
+		return funcRepository.findAll();
+	}
 
-		      ExampleMatcher matcher = ExampleMatcher
-		         .matching()
-		         .withIgnoreCase()
-		         .withStringMatcher(ExampleMatcher.StringMatcher.ENDING);
+	public List<FuncEntity> findByName(String name) {
 
-		      Example<FuncEntity> example = Example.of(funct, matcher);
+		FuncEntity funct = new FuncEntity();
+		funct.setName(name);
 
-		      return funcRepository.findAll(example);
-		   }
-	   
-	   
-	   public List<FuncEntity> findByDependents(Integer depend){
+		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase()
+				.withStringMatcher(ExampleMatcher.StringMatcher.ENDING);
 
-		   FuncEntity funct = new FuncEntity();
-		      funct.setDependents(depend);
-		      Example<FuncEntity> example = Example.of(funct);
+		Example<FuncEntity> example = Example.of(funct, matcher);
 
-		      return funcRepository.findAll(example);
-		   }  
+		return funcRepository.findAll(example);
+	}
+
+	public List<FuncEntity> findByDependents(Integer depend) {
+
+		FuncEntity funct = new FuncEntity();
+		funct.setDependents(depend);
+		Example<FuncEntity> example = Example.of(funct);
+
+		return funcRepository.findAll(example);
+	}
+
+	public void deleteFuncById(Long idUsuario) {
+		System.out.println("Deletando usuario com id " + idUsuario);
+		funcRepository.deleteById(idUsuario);
+	}
+
+	public void deleteAllFunc() {
+		System.out.println("Deletando todos os usuarios");
+		funcRepository.deleteAll();
+	}
 
 }
-

@@ -3,7 +3,6 @@ package posutfpr.banco.ativcinco.service;
 import java.util.List;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -17,57 +16,59 @@ import posutfpr.banco.ativcinco.repository.DepartamentRepository;
 
 @Service
 public class DepartamentService {
-	
-	
+
 	@Autowired
 	private DepartamentRepository departamentRepository;
-	
+
 	public DepartamentEntity saveDepartament(DepartamentEntity departament) {
 		return departamentRepository.save(departament);
-	   }
-	
-	  public Optional <DepartamentEntity> findDepartById(Long id) {
-	      return departamentRepository.findById(id);
-	   }
+	}
 
-	   public List<DepartamentEntity> findAllDepart() {
-	      return departamentRepository.findAll();
-	   }
-	
-	   
-	   public List<DepartamentEntity> findByName(String name) {
+	public Optional<DepartamentEntity> findDepartById(Long id) {
+		return departamentRepository.findById(id);
+	}
 
-		   DepartamentEntity depart = new DepartamentEntity(); 
-		      depart.setName(name);
+	public List<DepartamentEntity> findAllDepart() {
+		return departamentRepository.findAll();
+	}
 
-		      ExampleMatcher matcher = ExampleMatcher
-		         .matching()
-		         .withIgnoreCase()
-		         .withStringMatcher(ExampleMatcher.StringMatcher.ENDING);
+	public List<DepartamentEntity> findByName(String name) {
 
-		      Example<DepartamentEntity> example = Example.of(depart, matcher);
+		DepartamentEntity depart = new DepartamentEntity();
+		depart.setName(name);
 
-		      return departamentRepository.findAll(example);
-		   }
-	   
-	   
-	   		public List<DepartamentEntity>findAllByName(){
-	   			
-	   		
-		      Sort sort = Sort.by(Sort.Direction.DESC,"name");
-		      
-		      return departamentRepository.findAll(sort);
-		   }
-	   
-	   
-	   
-	   public Page<DepartamentEntity> paginResults() {
-		   
-		    Pageable pageable = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC,"name"));
-				  		   
-		   return departamentRepository.findAll(pageable);
-		   }
-	   
+		ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreCase()
+				.withStringMatcher(ExampleMatcher.StringMatcher.ENDING);
+
+		Example<DepartamentEntity> example = Example.of(depart, matcher);
+
+		return departamentRepository.findAll(example);
+	}
+
+	public List<DepartamentEntity> findAllByName() {
+
+		Sort sort = Sort.by(Sort.Direction.ASC, "name");
+
+		return departamentRepository.findAll(sort);
+	}
+
+	public Page<DepartamentEntity> paginResults() {
+
+		Pageable pageable = PageRequest.of(0, 3, Sort.by(Sort.Direction.ASC, "name"));
+
+		return departamentRepository.findAll(pageable);
+	}
+
+	public void delDepartament(Long id) {
+
+		departamentRepository.deleteById(id);
+
+		System.out.println("Delete departament with id :" + id);
+	}
+
+	public void deleteAllDep() {
+		System.out.println("Deletando todos os departamentos");
+		departamentRepository.deleteAll();
+	}
 
 }
-

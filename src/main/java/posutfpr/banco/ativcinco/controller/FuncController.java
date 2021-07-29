@@ -15,28 +15,25 @@ import posutfpr.banco.ativcinco.service.FuncService;
 @RestController
 @RequestMapping("/func")
 public class FuncController {
-	
+
 	@Autowired
 	FuncService funcService;
-	
-	
-	@PostMapping	
+
+	@PostMapping
 	public FuncEntity createFunc(@RequestBody FuncEntity funcEntity) {
-		
+
 		System.out.println("Entrou no metodo Post");
-		
+
 		return funcService.saveFunc(funcEntity);
-		
-				
-				
+
 	}
-	
-		@GetMapping
-		public List<FuncEntity> getFuncList(){
-		
+
+	@GetMapping
+	public List<FuncEntity> getFuncList() {
+
 		System.out.println("Todos os departamentos");
 		return funcService.findAllFunc();
-		
+
 	}
 
 }
