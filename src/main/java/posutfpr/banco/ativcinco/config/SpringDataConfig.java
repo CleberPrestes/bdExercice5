@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.jolbox.bonecp.BoneCPDataSource;
 
-//import com.jolbox.bonecp.BoneCPDataSource;
+
 
 
 
@@ -74,8 +74,6 @@ public class SpringDataConfig{
 	return manager;
 	}
 	
-	
 
-// métodos de configurações serão adicionados aqui.
 }
 
